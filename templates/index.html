@@ -1,52 +1,84 @@
 {% extends "base.html" %} {% block content %}
 
-<h3 class="fw-bold mb-4">Dashboard Sistem Pakar</h3>
-<p class="text-muted">Silakan pilih menu untuk melanjutkan.</p>
-
-<!-- GRID 4 MENU -->
-<div class="row g-4 mt-1">
-  <!-- CARD 1 -->
-  <div class="col-md-6 col-lg-3">
-    <a href="/diagnose-start" style="text-decoration: none; color: inherit">
-      <div class="dashboard-card text-center">
-        <i class="bi bi-search-heart dashboard-icon"></i>
-        <h5 class="fw-semibold">Mulai Diagnosa</h5>
-        <p class="text-muted small">
-          Proses diagnosa berdasarkan gejala laptop.
-        </p>
-      </div>
-    </a>
+<div class="max-w-7xl mx-auto">
+  <div class="mb-8">
+    <h3 class="text-3xl font-bold text-white mb-2">Dashboard Sistem Pakar</h3>
+    <p class="text-slate-400">Silakan pilih menu untuk melanjutkan.</p>
   </div>
 
-  <!-- CARD 2 -->
-  <div class="col-md-6 col-lg-3">
-    <a href="/gejala" style="text-decoration: none; color: inherit">
-      <div class="dashboard-card text-center">
-        <i class="bi bi-list-task dashboard-icon"></i>
-        <h5 class="fw-semibold">Data Gejala</h5>
-        <p class="text-muted small">Daftar lengkap 41 gejala.</p>
+  <!-- GRID 4 MENU -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+    <!-- CARD 1 -->
+    <a href="/diagnose-start" class="group">
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors"
+          >
+            <i class="bi bi-search-heart text-4xl text-blue-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Mulai Diagnosa</h5>
+          <p class="text-sm text-slate-400">
+            Proses diagnosa berdasarkan gejala laptop.
+          </p>
+        </div>
       </div>
     </a>
-  </div>
 
-  <!-- CARD 3 -->
-  <div class="col-md-6 col-lg-3">
-    <a href="/kerusakan" style="text-decoration: none; color: inherit">
-      <div class="dashboard-card text-center">
-        <i class="bi bi-exclamation-triangle dashboard-icon"></i>
-        <h5 class="fw-semibold">Data Kerusakan</h5>
-        <p class="text-muted small">22 jenis kerusakan & penjelasannya.</p>
+    <!-- CARD 2 -->
+    <a href="/gejala" class="group">
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors"
+          >
+            <i class="bi bi-list-task text-4xl text-purple-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Data Gejala</h5>
+          <p class="text-sm text-slate-400">Daftar lengkap 41 gejala.</p>
+        </div>
       </div>
     </a>
-  </div>
 
-  <!-- CARD 4 -->
-  <div class="col-md-6 col-lg-3">
-    <a href="/tentang" style="text-decoration: none; color: inherit">
-      <div class="dashboard-card text-center">
-        <i class="bi bi-info-circle dashboard-icon"></i>
-        <h5 class="fw-semibold">Tentang Sistem</h5>
-        <p class="text-muted small">Informasi metode Naive Bayes + CF.</p>
+    <!-- CARD 3 -->
+    <a href="/kerusakan" class="group">
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-amber-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-1"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors"
+          >
+            <i class="bi bi-exclamation-triangle text-4xl text-amber-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Data Kerusakan</h5>
+          <p class="text-sm text-slate-400">
+            22 jenis kerusakan & penjelasannya.
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- CARD 4 -->
+    <a href="/tentang" class="group">
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1"
+      >
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors"
+          >
+            <i class="bi bi-info-circle text-4xl text-emerald-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Tentang Sistem</h5>
+          <p class="text-sm text-slate-400">
+            Informasi metode Naive Bayes + CF.
+          </p>
+        </div>
       </div>
     </a>
   </div>

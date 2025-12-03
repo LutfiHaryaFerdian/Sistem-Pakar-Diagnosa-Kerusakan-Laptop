@@ -1,59 +1,153 @@
 {% extends "base.html" %} {% block content %}
-<h4 class="mb-4">Hasil Diagnosa</h4>
 
-<div class="alert alert-info shadow-sm">
-  <h5 class="fw-bold mb-1">
-    {{ result.fault_code }} — {{ result.fault_name }}
-  </h5>
-  <p class="mb-0">
-    Tingkat Keyakinan Sistem:
-    <span class="fw-bold">{{ "%.2f"|format(result.cf_percent) }}%</span>
-  </p>
+<div class="max-w-6xl mx-auto">
+  <div class="mb-8">
+    <h3 class="text-3xl font-bold text-white mb-2">Hasil Diagnosa</h3>
+    <p class="text-slate-400">Ringkasan hasil analisis sistem pakar</p>
+  </div>
+
+  <!-- Result Card -->
+  <div
+    class="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-6 border border-blue-500/30 mb-8 shadow-lg shadow-blue-500/10"
+  >
+    <div class="flex items-start gap-4">
+      <div
+        class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0"
+      >
+        <i class="bi bi-check-circle text-2xl text-blue-400"></i>
+      </div>
+      <div class="flex-1">
+        <h5 class="text-xl font-bold text-white mb-1">
+          {{ result.fault_code }} — {{ result.fault_name }}
+        </h5>
+        <p class="text-slate-300">
+          Tingkat Keyakinan Sistem:
+          <span class="font-bold text-blue-400"
+            >{{ "%.2f"|format(result.cf_percent) }}%</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contributing Symptoms -->
+  <div class="mb-8">
+    <h5 class="text-xl font-semibold text-white mb-4">
+      Gejala yang Berkontribusi
+    </h5>
+    <div
+      class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-slate-700/50 bg-slate-800/50">
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Kode
+              </th>
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Gejala
+              </th>
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                CF Gejala
+              </th>
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Intensitas
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700/30">
+            {% for g, info in result.details.items() %}
+            <tr class="hover:bg-slate-800/30 transition-colors">
+              <td class="px-6 py-4">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                >
+                  {{ g }}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-slate-200">{{ info.gejala }}</td>
+              <td class="px-6 py-4 text-slate-300">
+                {{ "%.3f"|format(info.cf_gejala) }}
+              </td>
+              <td class="px-6 py-4 text-slate-300">{{ info.intensitas }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Naive Bayes Probabilities -->
+  <div class="mb-8">
+    <h5 class="text-xl font-semibold text-white mb-4">
+      Probabilitas Naive Bayes
+    </h5>
+    <div
+      class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden"
+    >
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-slate-700/50 bg-slate-800/50">
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Kode
+              </th>
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Nama Kerusakan
+              </th>
+              <th
+                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
+              >
+                Probabilitas
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700/30">
+            {% for k, v in result.nb_all.items() %}
+            <tr class="hover:bg-slate-800/30 transition-colors">
+              <td class="px-6 py-4">
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >
+                  {{ k }}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-slate-200">{{ k }}</td>
+              <td class="px-6 py-4 text-slate-300 font-mono text-sm">
+                {{ "%.10f"|format(v) }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div class="flex justify-end">
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-medium rounded-lg border border-slate-600/50 transition-all duration-300"
+    >
+      <i class="bi bi-arrow-left"></i>
+      Kembali
+    </a>
+  </div>
 </div>
 
-<h5 class="mt-4">Gejala yang Berkontribusi</h5>
-<table class="table table-bordered table-striped mt-2">
-  <thead>
-    <tr>
-      <th>Kode</th>
-      <th>Gejala</th>
-      <th>CF Gejala</th>
-      <th>Intensitas</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for g, info in result.details.items() %}
-    <tr>
-      <td class="fw-semibold">{{ g }}</td>
-      <td>{{ info.gejala }}</td>
-      <td>{{ "%.3f"|format(info.cf_gejala) }}</td>
-      <td>{{ info.intensitas }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<h5 class="mt-4">Probabilitas Naive Bayes</h5>
-<table class="table table-bordered table-hover mt-2">
-  <thead>
-    <tr>
-      <th>Kode</th>
-      <th>Nama Kerusakan</th>
-      <th>Probabilitas</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for k, v in result.nb_all.items() %}
-    <tr>
-      <td class="fw-semibold">{{ k }}</td>
-      <td>{{ k }}</td>
-      <td>{{ "%.10f"|format(v) }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<div class="text-end mt-4">
-  <a href="/" class="btn btn-secondary px-4 py-2">⬅ Kembali</a>
-</div>
 {% endblock %}

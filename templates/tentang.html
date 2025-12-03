@@ -1,62 +1,119 @@
 {% extends "base.html" %} {% block content %}
-<h3 class="fw-bold mb-4">
-  <i class="bi bi-info-circle"></i> Tentang Sistem Pakar
-</h3>
 
-<div class="card-modern p-4">
-  <h5 class="fw-bold">📌 Deskripsi Sistem</h5>
-  <p class="text-muted">
-    Sistem pakar ini dirancang untuk mendiagnosa kerusakan laptop berdasarkan
-    kumpulan gejala yang dialami pengguna. Sistem menggunakan gabungan metode:
-    <b>Naive Bayes</b> untuk klasifikasi awal dan
-    <b>Certainty Factor (CF)</b> untuk menghitung tingkat keyakinan.
-  </p>
-
-  <hr />
-
-  <h5 class="fw-bold">🧠 Metode Naive Bayes</h5>
-  <p class="text-muted">
-    Naive Bayes digunakan untuk menghitung probabilitas awal dari setiap jenis
-    kerusakan. Sistem menilai apakah rangkaian gejala yang Anda berikan paling
-    cocok dengan rule (aturan) kerusakan pada basis pengetahuan.
-  </p>
-
-  <div class="alert alert-primary">
-    Rumus sederhana: <br />
-    <b>P(Kerusakan | Gejala) = P(G | K) × P(K)</b>
+<div class="max-w-5xl mx-auto">
+  <div class="mb-8">
+    <h3 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
+      <i class="bi bi-info-circle text-emerald-400"></i>
+      Tentang Sistem Pakar
+    </h3>
+    <p class="text-slate-400">Informasi tentang metode dan cara kerja sistem</p>
   </div>
 
-  <hr />
+  <div
+    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 p-8 space-y-8"
+  >
+    <!-- Deskripsi Sistem -->
+    <div>
+      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+        <i class="bi bi-pin-angle text-blue-400"></i>
+        Deskripsi Sistem
+      </h5>
+      <p class="text-slate-300 leading-relaxed">
+        Sistem pakar ini dirancang untuk mendiagnosa kerusakan laptop
+        berdasarkan kumpulan gejala yang dialami pengguna. Sistem menggunakan
+        gabungan metode:
+        <span class="font-semibold text-blue-400">Naive Bayes</span> untuk
+        klasifikasi awal dan
+        <span class="font-semibold text-blue-400">Certainty Factor (CF)</span>
+        untuk menghitung tingkat keyakinan.
+      </p>
+    </div>
 
-  <h5 class="fw-bold">⚡ Metode Certainty Factor (CF)</h5>
-  <p class="text-muted">
-    Setelah probabilitas Naive Bayes didapatkan, metode Certainty Factor
-    digunakan untuk mengukur:
-  </p>
+    <div class="border-t border-slate-700/50"></div>
 
-  <ul class="text-muted">
-    <li>Tingkat keyakinan pakar terhadap gejala</li>
-    <li>Tingkat intensitas gejala dari pengguna</li>
-    <li>Kombinasi CF dari beberapa gejala relevan</li>
-  </ul>
+    <!-- Metode Naive Bayes -->
+    <div>
+      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+        <i class="bi bi-brain text-purple-400"></i>
+        Metode Naive Bayes
+      </h5>
+      <p class="text-slate-300 leading-relaxed mb-4">
+        Naive Bayes digunakan untuk menghitung probabilitas awal dari setiap
+        jenis kerusakan. Sistem menilai apakah rangkaian gejala yang Anda
+        berikan paling cocok dengan rule (aturan) kerusakan pada basis
+        pengetahuan.
+      </p>
 
-  <div class="alert alert-info">
-    Rumus kombinasi CF: <br />
-    <b
-      >CF<sub>final</sub> = CF<sub>1</sub> + CF<sub>2</sub>(1 −
-      CF<sub>1</sub>)</b
+      <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+        <p class="text-slate-300 mb-2">Rumus sederhana:</p>
+        <p class="font-semibold text-blue-300 font-mono text-lg">
+          P(Kerusakan | Gejala) = P(G | K) × P(K)
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-700/50"></div>
+
+    <!-- Metode Certainty Factor -->
+    <div>
+      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+        <i class="bi bi-lightning-charge text-amber-400"></i>
+        Metode Certainty Factor (CF)
+      </h5>
+      <p class="text-slate-300 leading-relaxed mb-4">
+        Setelah probabilitas Naive Bayes didapatkan, metode Certainty Factor
+        digunakan untuk mengukur:
+      </p>
+
+      <ul class="space-y-2 mb-4 ml-6">
+        <li class="text-slate-300 flex items-start gap-2">
+          <span class="text-amber-400 mt-1">•</span>
+          <span>Tingkat keyakinan pakar terhadap gejala</span>
+        </li>
+        <li class="text-slate-300 flex items-start gap-2">
+          <span class="text-amber-400 mt-1">•</span>
+          <span>Tingkat intensitas gejala dari pengguna</span>
+        </li>
+        <li class="text-slate-300 flex items-start gap-2">
+          <span class="text-amber-400 mt-1">•</span>
+          <span>Kombinasi CF dari beberapa gejala relevan</span>
+        </li>
+      </ul>
+
+      <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
+        <p class="text-slate-300 mb-2">Rumus kombinasi CF:</p>
+        <p class="font-semibold text-amber-300 font-mono text-lg">
+          CF<sub>final</sub> = CF<sub>1</sub> + CF<sub>2</sub>(1 −
+          CF<sub>1</sub>)
+        </p>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-700/50"></div>
+
+    <!-- Tujuan Sistem -->
+    <div>
+      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
+        <i class="bi bi-bullseye text-emerald-400"></i>
+        Tujuan Sistem
+      </h5>
+      <p class="text-slate-300 leading-relaxed">
+        Sistem ini membantu pengguna mengetahui kerusakan laptop secara cepat,
+        tanpa harus langsung ke teknisi. Hasil diagnosa memberikan kategori
+        kerusakan dan tingkat keyakinan berbasis pakar.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-medium rounded-lg border border-slate-600/50 transition-all duration-300"
     >
+      <i class="bi bi-arrow-left"></i>
+      Kembali
+    </a>
   </div>
-
-  <hr />
-
-  <h5 class="fw-bold">🎯 Tujuan Sistem</h5>
-  <p class="text-muted">
-    Sistem ini membantu pengguna mengetahui kerusakan laptop secara cepat, tanpa
-    harus langsung ke teknisi. Hasil diagnosa memberikan kategori kerusakan dan
-    tingkat keyakinan berbasis pakar.
-  </p>
 </div>
 
-<a href="/" class="btn btn-secondary mt-3">⬅ Kembali</a>
 {% endblock %}
