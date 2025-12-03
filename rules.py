@@ -71,6 +71,15 @@ SYMPTOMS = {
     "G41": "Tidak menyala saat tekan tombol power",
 }
 
+# Kategorisasi gejala untuk fitur filter
+SYMPTOM_CATEGORIES = {
+    "Hardware": ["G1", "G2", "G3", "G5", "G6", "G21", "G24", "G25", "G26", "G27", "G28", "G29", "G30", "G31", "G32", "G33", "G36", "G37", "G38", "G41"],
+    "Software": ["G7", "G9", "G11", "G12", "G14", "G15", "G17", "G18", "G19", "G20", "G34", "G40"],
+    "BIOS": ["G3", "G4", "G5", "G22", "G35", "G39"],
+    "Power": ["G16", "G23", "G28", "G29", "G30", "G32", "G41"],
+    "Display": ["G1", "G2", "G20", "G32", "G36"],
+}
+
 # ====== RULES SESUAI JURNAL ======
 
 RULES = {
@@ -161,29 +170,51 @@ def diagnose(symptoms_with_intensity):
     symptoms = list(symptoms_with_intensity.keys())
 
     nb_scores = naive_bayes(symptoms)
-    top_fault = max(nb_scores, key=nb_scores.get)
-
-    relevant = RULES[top_fault]
-
-    cf_list = []
-    detail = {}
-
-    for s, intens in symptoms_with_intensity.items():
-        if s in relevant:
-            cf_val = cf_gejala(s, intens)
-            cf_list.append(cf_val)
-            detail[s] = {
-                "gejala": SYMPTOMS[s],
-                "cf_gejala": cf_val,
-                "intensitas": intens
-            }
-
-    cf_total = final_cf(cf_list)
-
-    return {
-        "fault_code": top_fault,
-        "fault_name": FAULTS[top_fault],
-        "cf_percent": cf_total * 100,
-        "nb_all": nb_scores,
-        "details": detail
-    }
+    
+    # Hitung CF untuk semua kerusakan yang relevan
+    all_results = []
+    
+    for fault_code, fault_rules in RULES.items():
+        cf_list = []
+        detail = {}
+        
+        for s, intens in symptoms_with_intensity.items():
+            if s in fault_rules:
+                cf_val = cf_gejala(s, intens)
+                cf_list.append(cf_val)
+                detail[s] = {
+                    "gejala": SYMPTOMS[s],
+                    "cf_gejala": cf_val,
+                    "intensitas": intens
+                }
+        
+        if cf_list:  # Hanya jika ada gejala yang cocok
+            cf_total = final_cf(cf_list)
+            all_results.append({
+                "fault_code": fault_code,
+                "fault_name": FAULTS[fault_code],
+                "cf_percent": cf_total * 100,
+                "nb_score": nb_scores[fault_code],
+                "details": detail
+            })
+    
+    # Sort berdasarkan CF tertinggi
+    all_results.sort(key=lambda x: x["cf_percent"], reverse=True)
+    
+    # Ambil top 3
+    top_3 = all_results[:3] if len(all_results) >= 3 else all_results
+    
+    # Hasil utama (top 1)
+    top_result = top_3[0] if top_3 else None
+    
+    if top_result:
+        return {
+            "fault_code": top_result["fault_code"],
+            "fault_name": top_result["fault_name"],
+            "cf_percent": top_result["cf_percent"],
+            "nb_all": nb_scores,
+            "details": top_result["details"],
+            "top_3": top_3  # Tambahan untuk menampilkan top 3
+        }
+    
+    return None

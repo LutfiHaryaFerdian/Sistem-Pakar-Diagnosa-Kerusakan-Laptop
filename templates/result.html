@@ -6,17 +6,96 @@
     <p class="text-slate-400">Ringkasan hasil analisis sistem pakar</p>
   </div>
 
-  <!-- Result Card -->
+  <!-- Top 3 Results Comparison -->
+  <div class="mb-8">
+    <h5 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+      <i class="bi bi-trophy text-yellow-400"></i>
+      Top 3 Kemungkinan Kerusakan
+    </h5>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {% for idx, item in enumerate(result.top_3) %}
+      <div
+        class="bg-gradient-to-br {% if idx == 0 %}from-blue-900/40 to-blue-800/30 border-blue-500/40 {% elif idx == 1 %}from-purple-900/40 to-purple-800/30 border-purple-500/40 {% else %}from-amber-900/40 to-amber-800/30 border-amber-500/40{% endif %} rounded-2xl p-6 border relative overflow-hidden"
+      >
+        <div class="absolute top-4 right-4">
+          <span
+            class="inline-flex items-center justify-center w-8 h-8 rounded-full {% if idx == 0 %}bg-yellow-500/20 text-yellow-400 border border-yellow-500/40 {% elif idx == 1 %}bg-slate-400/20 text-slate-300 border border-slate-400/40 {% else %}bg-orange-500/20 text-orange-400 border border-orange-500/40{% endif %} font-bold text-sm"
+          >
+            #{{ idx + 1 }}
+          </span>
+        </div>
+
+        <div class="mb-4">
+          <span
+            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium {% if idx == 0 %}bg-blue-500/20 text-blue-300 {% elif idx == 1 %}bg-purple-500/20 text-purple-300 {% else %}bg-amber-500/20 text-amber-300{% endif %}"
+          >
+            {{ item.fault_code }}
+          </span>
+        </div>
+
+        <h6 class="text-lg font-bold text-white mb-3">{{ item.fault_name }}</h6>
+
+        <!-- Progress Bar -->
+        <div class="mb-3">
+          <div class="flex justify-between text-sm text-slate-300 mb-1">
+            <span>Tingkat Keyakinan</span>
+            <span
+              class="font-bold {{ 'text-blue-400' if idx==0 else 'text-purple-400' if idx==1 else 'text-amber-400' }}"
+            >
+              {{ "%.2f"|format(item.cf_percent) }}%
+            </span>
+          </div>
+
+          <div class="w-full bg-slate-700/50 rounded-full h-2.5">
+            <div
+              class="{% if idx == 0 %}bg-gradient-to-r from-blue-600 to-blue-400 {% elif idx == 1 %}bg-gradient-to-r from-purple-600 to-purple-400 {% else %}bg-gradient-to-r from-amber-600 to-amber-400{% endif %} h-2.5 rounded-full transition-all duration-500"
+              style="width: {{ item.cf_percent }}%"
+            ></div>
+          </div>
+        </div>
+
+        <div class="text-sm text-slate-400">
+          {{ item.details|length }} gejala terdeteksi
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Chart Visualization -->
+  <div class="mb-8">
+    <h5 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+      <i class="bi bi-bar-chart text-emerald-400"></i>
+      Visualisasi Perbandingan
+    </h5>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 p-6"
+      >
+        <h6 class="text-lg font-semibold text-white mb-4">Bar Chart</h6>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <div
+        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 p-6"
+      >
+        <h6 class="text-lg font-semibold text-white mb-4">Pie Chart</h6>
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Result -->
   <div
-    class="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-6 border border-blue-500/30 mb-8 shadow-lg shadow-blue-500/10"
+    class="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-6 border border-blue-500/30 mb-8"
   >
     <div class="flex items-start gap-4">
       <div
-        class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0"
+        class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center"
       >
         <i class="bi bi-check-circle text-2xl text-blue-400"></i>
       </div>
-      <div class="flex-1">
+      <div>
         <h5 class="text-xl font-bold text-white mb-1">
           {{ result.fault_code }} — {{ result.fault_name }}
         </h5>
@@ -35,6 +114,7 @@
     <h5 class="text-xl font-semibold text-white mb-4">
       Gejala yang Berkontribusi
     </h5>
+
     <div
       class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden"
     >
@@ -69,7 +149,7 @@
             <tr class="hover:bg-slate-800/30 transition-colors">
               <td class="px-6 py-4">
                 <span
-                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                  class="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20"
                 >
                   {{ g }}
                 </span>
@@ -87,67 +167,53 @@
     </div>
   </div>
 
-  <!-- Naive Bayes Probabilities -->
-  <div class="mb-8">
-    <h5 class="text-xl font-semibold text-white mb-4">
-      Probabilitas Naive Bayes
-    </h5>
-    <div
-      class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden"
-    >
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b border-slate-700/50 bg-slate-800/50">
-              <th
-                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
-              >
-                Kode
-              </th>
-              <th
-                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
-              >
-                Nama Kerusakan
-              </th>
-              <th
-                class="px-6 py-4 text-left text-sm font-semibold text-slate-300"
-              >
-                Probabilitas
-              </th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-700/30">
-            {% for k, v in result.nb_all.items() %}
-            <tr class="hover:bg-slate-800/30 transition-colors">
-              <td class="px-6 py-4">
-                <span
-                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                >
-                  {{ k }}
-                </span>
-              </td>
-              <td class="px-6 py-4 text-slate-200">{{ k }}</td>
-              <td class="px-6 py-4 text-slate-300 font-mono text-sm">
-                {{ "%.10f"|format(v) }}
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Back Button -->
-  <div class="flex justify-end">
+  <!-- Back Buttons -->
+  <div class="flex gap-4">
     <a
       href="/"
-      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-medium rounded-lg border border-slate-600/50 transition-all duration-300"
+      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 rounded-lg"
     >
-      <i class="bi bi-arrow-left"></i>
-      Kembali
+      <i class="bi bi-arrow-left"></i> Kembali
+    </a>
+    <a
+      href="/diagnose-start"
+      class="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg"
+    >
+      <i class="bi bi-arrow-repeat"></i> Diagnosa Lagi
     </a>
   </div>
 </div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const top3Data = {{ top3_json | safe }};
+
+  const labels = top3Data.map(i => i.fault_code + " - " + i.fault_name);
+  const dataValues = top3Data.map(i => i.cf_percent);
+
+  const barCtx = document.getElementById("barChart").getContext("2d");
+  new Chart(barCtx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: dataValues
+      }]
+    }
+  });
+
+  const pieCtx = document.getElementById("pieChart").getContext("2d");
+  new Chart(pieCtx, {
+    type: "pie",
+    data: {
+      labels: labels,
+      datasets: [{
+        data: dataValues
+      }]
+    }
+  });
+</script>
 
 {% endblock %}
