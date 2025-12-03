@@ -130,7 +130,7 @@ P_NO: float = 0.1
 
 
 # ============================
-#   NAIVE BAYES + CF ENGINE
+#   ENGINE: NAIVE BAYES + CF
 # ============================
 
 def naive_bayes(symptoms: List[str]) -> Dict[str, float]:
@@ -168,6 +168,10 @@ def final_cf(cf_list: List[float]) -> float:
     return c
 
 
+# ============================
+#   DIAGNOSE FINAL
+# ============================
+
 def diagnose(symptoms_with_intensity: Dict[str, float]) -> Dict[str, Any] | None:
     symptoms = list(symptoms_with_intensity.keys())
 
@@ -180,14 +184,18 @@ def diagnose(symptoms_with_intensity: Dict[str, float]) -> Dict[str, Any] | None
         detail: Dict[str, Any] = {}
         
         for s, intens in symptoms_with_intensity.items():
-            if s in fault_rules:
-                cf_val = cf_gejala(s, intens)
+            is_relevant = s in fault_rules
+            cf_val = cf_gejala(s, intens) if is_relevant else 0
+
+            detail[s] = {
+                "gejala": SYMPTOMS[s],
+                "cf_gejala": cf_val,
+                "intensitas": intens,
+                "relevan": is_relevant
+            }
+
+            if is_relevant:
                 cf_list.append(cf_val)
-                detail[s] = {
-                    "gejala": SYMPTOMS[s],
-                    "cf_gejala": cf_val,
-                    "intensitas": intens
-                }
         
         if cf_list:
             cf_total = final_cf(cf_list)
@@ -198,21 +206,30 @@ def diagnose(symptoms_with_intensity: Dict[str, float]) -> Dict[str, Any] | None
                 "nb_score": nb_scores[fault_code],
                 "details": detail
             })
-    
+
     all_results.sort(key=lambda x: x["cf_percent"], reverse=True)
-    
+
     top_3 = all_results[:3] if len(all_results) >= 3 else all_results
-    
     top_result = top_3[0] if top_3 else None
-    
+
+    # Semua gejala user (untuk UI)
+    all_selected = {
+        s: {
+            "gejala": SYMPTOMS[s],
+            "intensitas": intens
+        }
+        for s, intens in symptoms_with_intensity.items()
+    }
+
     if top_result:
         return {
             "fault_code": top_result["fault_code"],
             "fault_name": top_result["fault_name"],
             "cf_percent": top_result["cf_percent"],
             "nb_all": nb_scores,
-            "details": top_result["details"],
+            "details": top_result["details"],   # relevan & tidak relevan
+            "all_selected": all_selected,        # semua gejala yg dipilih user
             "top_3": top_3
         }
-    
+
     return None

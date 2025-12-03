@@ -144,9 +144,11 @@
               </th>
             </tr>
           </thead>
+
           <tbody class="divide-y divide-slate-700/30">
             {% for g, info in result.details.items() %}
             <tr class="hover:bg-slate-800/30 transition-colors">
+              <!-- CODE -->
               <td class="px-6 py-4">
                 <span
                   class="inline-flex px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20"
@@ -154,10 +156,30 @@
                   {{ g }}
                 </span>
               </td>
-              <td class="px-6 py-4 text-slate-200">{{ info.gejala }}</td>
+
+              <!-- GEJALA + BADGE -->
+              <td class="px-6 py-4 text-slate-200">
+                {{ info.gejala }} {% if info.relevan %}
+                <span
+                  class="ml-2 px-2 py-1 text-xs rounded-full bg-green-600/20 text-green-300 border border-green-500/20"
+                >
+                  relevan
+                </span>
+                {% else %}
+                <span
+                  class="ml-2 px-2 py-1 text-xs rounded-full bg-red-600/20 text-red-300 border border-red-500/20"
+                >
+                  tidak relevan
+                </span>
+                {% endif %}
+              </td>
+
+              <!-- CF -->
               <td class="px-6 py-4 text-slate-300">
                 {{ "%.3f"|format(info.cf_gejala) }}
               </td>
+
+              <!-- INTENSITAS -->
               <td class="px-6 py-4 text-slate-300">{{ info.intensitas }}</td>
             </tr>
             {% endfor %}
