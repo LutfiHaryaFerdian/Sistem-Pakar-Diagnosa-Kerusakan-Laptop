@@ -1,44 +1,55 @@
 {% extends "base.html" %} {% block content %}
-<h4 class="mb-4">Form Diagnosa Kerusakan Laptop</h4>
 
-<p class="text-muted">
-  Pilih intensitas gejala yang dialami laptop Anda. Semakin tinggi
-  intensitasnya, semakin besar pengaruhnya terhadap diagnosa.
-</p>
+<h3 class="fw-bold mb-4">Dashboard Sistem Pakar</h3>
+<p class="text-muted">Silakan pilih menu untuk melanjutkan.</p>
 
-<form method="POST" action="/diagnose">
-  <table class="table table-bordered table-hover align-middle">
-    <thead>
-      <tr>
-        <th style="width: 80px">Kode</th>
-        <th>Gejala</th>
-        <th style="width: 200px">Intensitas</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {% for code, name in symptoms.items() %}
-      <tr>
-        <td class="fw-semibold">{{ code }}</td>
-        <td>{{ name }}</td>
-        <td>
-          <select name="{{ code }}" class="form-select">
-            <option value="0">Tidak Ada</option>
-            <option value="0.25">Jarang</option>
-            <option value="0.5">Cukup Sering</option>
-            <option value="0.75">Sering</option>
-            <option value="1">Sangat Sering</option>
-          </select>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <div class="text-end mt-4">
-    <button class="btn btn-primary px-4 py-2 shadow-sm">
-      🔍 Proses Diagnosa
-    </button>
+<!-- GRID 4 MENU -->
+<div class="row g-4 mt-1">
+  <!-- CARD 1 -->
+  <div class="col-md-6 col-lg-3">
+    <a href="/diagnose-start" style="text-decoration: none; color: inherit">
+      <div class="dashboard-card text-center">
+        <i class="bi bi-search-heart dashboard-icon"></i>
+        <h5 class="fw-semibold">Mulai Diagnosa</h5>
+        <p class="text-muted small">
+          Proses diagnosa berdasarkan gejala laptop.
+        </p>
+      </div>
+    </a>
   </div>
-</form>
+
+  <!-- CARD 2 -->
+  <div class="col-md-6 col-lg-3">
+    <a href="/gejala" style="text-decoration: none; color: inherit">
+      <div class="dashboard-card text-center">
+        <i class="bi bi-list-task dashboard-icon"></i>
+        <h5 class="fw-semibold">Data Gejala</h5>
+        <p class="text-muted small">Daftar lengkap 41 gejala.</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="col-md-6 col-lg-3">
+    <a href="/kerusakan" style="text-decoration: none; color: inherit">
+      <div class="dashboard-card text-center">
+        <i class="bi bi-exclamation-triangle dashboard-icon"></i>
+        <h5 class="fw-semibold">Data Kerusakan</h5>
+        <p class="text-muted small">22 jenis kerusakan & penjelasannya.</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="col-md-6 col-lg-3">
+    <a href="/tentang" style="text-decoration: none; color: inherit">
+      <div class="dashboard-card text-center">
+        <i class="bi bi-info-circle dashboard-icon"></i>
+        <h5 class="fw-semibold">Tentang Sistem</h5>
+        <p class="text-muted small">Informasi metode Naive Bayes + CF.</p>
+      </div>
+    </a>
+  </div>
+</div>
+
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content %}
+<h3 class="fw-bold mb-4">Form Diagnosa Kerusakan Laptop</h3>
+
+<form method="POST" action="/diagnose">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Kode</th>
+        <th>Gejala</th>
+        <th>Intensitas</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for code, name in symptoms.items() %}
+      <tr>
+        <td class="fw-semibold">{{ code }}</td>
+        <td>{{ name }}</td>
+        <td>
+          <select name="{{ code }}" class="form-select">
+            <option value="0">Tidak Ada</option>
+            <option value="0.25">Jarang</option>
+            <option value="0.5">Cukup Sering</option>
+            <option value="0.75">Sering</option>
+            <option value="1">Sangat Sering</option>
+          </select>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary px-4 py-2 mt-3 shadow-sm">
+    🔍 Proses Diagnosa
+  </button>
+</form>
+
+<a href="/" class="btn btn-secondary mt-3">⬅ Kembali</a>
+{% endblock %}
