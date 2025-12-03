@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+<h4 class="mb-4">Hasil Diagnosa</h4>
+
+<div class="alert alert-info shadow-sm">
+  <h5 class="fw-bold mb-1">
+    {{ result.fault_code }} — {{ result.fault_name }}
+  </h5>
+  <p class="mb-0">
+    Tingkat Keyakinan Sistem:
+    <span class="fw-bold">{{ "%.2f"|format(result.cf_percent) }}%</span>
+  </p>
+</div>
+
+<h5 class="mt-4">Gejala yang Berkontribusi</h5>
+<table class="table table-bordered table-striped mt-2">
+  <thead>
+    <tr>
+      <th>Kode</th>
+      <th>Gejala</th>
+      <th>CF Gejala</th>
+      <th>Intensitas</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for g, info in result.details.items() %}
+    <tr>
+      <td class="fw-semibold">{{ g }}</td>
+      <td>{{ info.gejala }}</td>
+      <td>{{ "%.3f"|format(info.cf_gejala) }}</td>
+      <td>{{ info.intensitas }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h5 class="mt-4">Probabilitas Naive Bayes</h5>
+<table class="table table-bordered table-hover mt-2">
+  <thead>
+    <tr>
+      <th>Kode</th>
+      <th>Nama Kerusakan</th>
+      <th>Probabilitas</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for k, v in result.nb_all.items() %}
+    <tr>
+      <td class="fw-semibold">{{ k }}</td>
+      <td>{{ k }}</td>
+      <td>{{ "%.10f"|format(v) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="text-end mt-4">
+  <a href="/" class="btn btn-secondary px-4 py-2">⬅ Kembali</a>
+</div>
+{% endblock %}

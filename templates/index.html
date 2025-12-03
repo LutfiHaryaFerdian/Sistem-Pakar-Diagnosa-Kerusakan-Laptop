@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block content %}
+<h4 class="mb-4">Form Diagnosa Kerusakan Laptop</h4>
+
+<p class="text-muted">
+  Pilih intensitas gejala yang dialami laptop Anda. Semakin tinggi
+  intensitasnya, semakin besar pengaruhnya terhadap diagnosa.
+</p>
+
+<form method="POST" action="/diagnose">
+  <table class="table table-bordered table-hover align-middle">
+    <thead>
+      <tr>
+        <th style="width: 80px">Kode</th>
+        <th>Gejala</th>
+        <th style="width: 200px">Intensitas</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for code, name in symptoms.items() %}
+      <tr>
+        <td class="fw-semibold">{{ code }}</td>
+        <td>{{ name }}</td>
+        <td>
+          <select name="{{ code }}" class="form-select">
+            <option value="0">Tidak Ada</option>
+            <option value="0.25">Jarang</option>
+            <option value="0.5">Cukup Sering</option>
+            <option value="0.75">Sering</option>
+            <option value="1">Sangat Sering</option>
+          </select>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="text-end mt-4">
+    <button class="btn btn-primary px-4 py-2 shadow-sm">
+      🔍 Proses Diagnosa
+    </button>
+  </div>
+</form>
+{% endblock %}
