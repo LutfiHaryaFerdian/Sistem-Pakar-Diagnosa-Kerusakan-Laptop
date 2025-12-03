@@ -1,8 +1,10 @@
+from typing import Dict, List, Any
+
 # ============================
 #   FULL KNOWLEDGE BASE
 # ============================
 
-FAULTS = {
+FAULTS: Dict[str, str] = {
     "K1": "LCD Rusak",
     "K2": "RAM Rusak",
     "K3": "HDD Rusak",
@@ -27,7 +29,7 @@ FAULTS = {
     "K22": "BIOS Error",
 }
 
-SYMPTOMS = {
+SYMPTOMS: Dict[str, str] = {
     "G1": "Tombol hidup tapi tidak ada tampilan",
     "G2": "Garis horizontal/vertikal di monitor",
     "G3": "Tidak ada tampilan awal BIOS",
@@ -72,7 +74,7 @@ SYMPTOMS = {
 }
 
 # Kategorisasi gejala untuk fitur filter
-SYMPTOM_CATEGORIES = {
+SYMPTOM_CATEGORIES: Dict[str, List[str]] = {
     "Hardware": ["G1", "G2", "G3", "G5", "G6", "G21", "G24", "G25", "G26", "G27", "G28", "G29", "G30", "G31", "G32", "G33", "G36", "G37", "G38", "G41"],
     "Software": ["G7", "G9", "G11", "G12", "G14", "G15", "G17", "G18", "G19", "G20", "G34", "G40"],
     "BIOS": ["G3", "G4", "G5", "G22", "G35", "G39"],
@@ -82,7 +84,7 @@ SYMPTOM_CATEGORIES = {
 
 # ====== RULES SESUAI JURNAL ======
 
-RULES = {
+RULES: Dict[str, List[str]] = {
     "K1": ["G1", "G2", "G26"],
     "K2": ["G3", "G4", "G5", "G11", "G12", "G33"],
     "K3": ["G6", "G7", "G8", "G10", "G21", "G22", "G34"],
@@ -109,7 +111,7 @@ RULES = {
 
 # ====== CF PAKAR (dari jurnal) ======
 
-CF_PAKAR = {
+CF_PAKAR: Dict[str, float] = {
     "G1": 0.8, "G2": 0.8, "G3": 1.0, "G4": 0.8, "G5": 0.8,
     "G6": 0.6, "G7": 1.0, "G8": 0.6, "G9": 0.6, "G10": 0.8,
     "G11": 0.6, "G12": 0.8, "G13": 0.6, "G14": 0.6,
@@ -122,19 +124,19 @@ CF_PAKAR = {
     "G39": 1.0, "G40": 0.6, "G41": 1.0,
 }
 
-CF_FALLBACK = 0.6
-P_YES = 0.9
-P_NO = 0.1
+CF_FALLBACK: float = 0.6
+P_YES: float = 0.9
+P_NO: float = 0.1
 
 
 # ============================
 #   NAIVE BAYES + CF ENGINE
 # ============================
 
-def naive_bayes(symptoms):
+def naive_bayes(symptoms: List[str]) -> Dict[str, float]:
     num_faults = len(FAULTS)
     prior = 1 / num_faults
-    scores = {}
+    scores: Dict[str, float] = {}
 
     for fault, rule_sym in RULES.items():
         score = prior
@@ -149,34 +151,33 @@ def naive_bayes(symptoms):
     return scores
 
 
-def cf_gejala(symptom, intensity):
+def cf_gejala(symptom: str, intensity: float) -> float:
     return CF_PAKAR.get(symptom, CF_FALLBACK) * intensity
 
 
-def combine_cf(a, b):
+def combine_cf(a: float, b: float) -> float:
     return a + b * (1 - a)
 
 
-def final_cf(cf_list):
+def final_cf(cf_list: List[float]) -> float:
     if not cf_list:
-        return 0
+        return 0.0
     c = cf_list[0]
     for v in cf_list[1:]:
         c = combine_cf(c, v)
     return c
 
 
-def diagnose(symptoms_with_intensity):
+def diagnose(symptoms_with_intensity: Dict[str, float]) -> Dict[str, Any] | None:
     symptoms = list(symptoms_with_intensity.keys())
 
     nb_scores = naive_bayes(symptoms)
     
-    # Hitung CF untuk semua kerusakan yang relevan
-    all_results = []
+    all_results: List[Dict[str, Any]] = []
     
     for fault_code, fault_rules in RULES.items():
-        cf_list = []
-        detail = {}
+        cf_list: List[float] = []
+        detail: Dict[str, Any] = {}
         
         for s, intens in symptoms_with_intensity.items():
             if s in fault_rules:
@@ -188,7 +189,7 @@ def diagnose(symptoms_with_intensity):
                     "intensitas": intens
                 }
         
-        if cf_list:  # Hanya jika ada gejala yang cocok
+        if cf_list:
             cf_total = final_cf(cf_list)
             all_results.append({
                 "fault_code": fault_code,
@@ -198,13 +199,10 @@ def diagnose(symptoms_with_intensity):
                 "details": detail
             })
     
-    # Sort berdasarkan CF tertinggi
     all_results.sort(key=lambda x: x["cf_percent"], reverse=True)
     
-    # Ambil top 3
     top_3 = all_results[:3] if len(all_results) >= 3 else all_results
     
-    # Hasil utama (top 1)
     top_result = top_3[0] if top_3 else None
     
     if top_result:
@@ -214,7 +212,7 @@ def diagnose(symptoms_with_intensity):
             "cf_percent": top_result["cf_percent"],
             "nb_all": nb_scores,
             "details": top_result["details"],
-            "top_3": top_3  # Tambahan untuk menampilkan top 3
+            "top_3": top_3
         }
     
     return None
