@@ -2,19 +2,22 @@
 
 # 🖥️ Laptop Diagnostic Expert System
 
-### *Intelligent AI-Powered Laptop Troubleshooting Platform*
+### _Intelligent AI-Powered Laptop Troubleshooting Platform_
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
-*Combining Naive Bayes Classification with Certainty Factor Reasoning*
+_Combining Naive Bayes Classification with Certainty Factor Reasoning_
 
 [🚀 Live Demo](#) • [📖 Documentation](#) • [🐛 Report Bug](#) • [✨ Request Feature](#)
 
 ---
 
-<img src="https://via.placeholder.com/800x400/0f172a/60a5fa?text=Expert+System+Dashboard" alt="System Preview" width="100%"/>
+<img src="images/Screenshot (314).png" alt="System Preview" width="100%"/>
+<img src="images/Screenshot (315).png" alt="System Preview" width="100%"/>
+<img src="images/Screenshot (316).png" alt="System Preview" width="100%"/>
+<img src="images/Screenshot (317).png" alt="System Preview" width="100%"/>
 
 ### **Mengidentifikasi 22 Jenis Kerusakan** | **41 Gejala Terdata** | **Akurasi Tinggi**
 
@@ -41,6 +44,7 @@ Dibangun dengan arsitektur modern dan knowledge base komprehensif, sistem ini me
 <td width="50%">
 
 ### 🧠 **Intelligent Diagnosis**
+
 - Hybrid AI: Naive Bayes + Certainty Factor
 - 41 symptoms knowledge base
 - 22 fault categories detection
@@ -51,6 +55,7 @@ Dibangun dengan arsitektur modern dan knowledge base komprehensif, sistem ini me
 <td width="50%">
 
 ### 📊 **Advanced Analytics**
+
 - Interactive data visualization
 - Bar & Pie chart comparison
 - Top 3 probable faults ranking
@@ -63,6 +68,7 @@ Dibangun dengan arsitektur modern dan knowledge base komprehensif, sistem ini me
 <td width="50%">
 
 ### 🎨 **Premium UI/UX**
+
 - Dark mode glassmorphism design
 - Smooth animations & transitions
 - Responsive across all devices
@@ -73,6 +79,7 @@ Dibangun dengan arsitektur modern dan knowledge base komprehensif, sistem ini me
 <td width="50%">
 
 ### ⚡ **Performance**
+
 - Lightning-fast diagnosis (<1s)
 - Dynamic search & filtering
 - Category-based symptom grouping
@@ -109,15 +116,15 @@ graph TB
 
 ### 💻 Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Backend** | Flask 3.0+ | Web framework & routing |
-| **AI Engine** | Python 3.8+ | Naive Bayes & CF algorithms |
-| **Frontend** | HTML5 + JavaScript | Dynamic UI interactions |
-| **Styling** | Tailwind CSS | Modern responsive design |
-| **Charts** | Chart.js | Data visualization |
-| **Icons** | Bootstrap Icons | UI iconography |
-| **Fonts** | Google Fonts (Inter) | Typography system |
+| Layer         | Technology           | Purpose                     |
+| ------------- | -------------------- | --------------------------- |
+| **Backend**   | Flask 3.0+           | Web framework & routing     |
+| **AI Engine** | Python 3.8+          | Naive Bayes & CF algorithms |
+| **Frontend**  | HTML5 + JavaScript   | Dynamic UI interactions     |
+| **Styling**   | Tailwind CSS         | Modern responsive design    |
+| **Charts**    | Chart.js             | Data visualization          |
+| **Icons**     | Bootstrap Icons      | UI iconography              |
+| **Fonts**     | Google Fonts (Inter) | Typography system           |
 
 <br>
 
@@ -239,9 +246,10 @@ Choose symptoms your laptop is experiencing from the comprehensive list of 41 sy
 **Set Intensity Levels**
 
 Rate each symptom's intensity:
+
 - `0` - Not Present
 - `0.25` - Rarely
-- `0.5` - Occasionally  
+- `0.5` - Occasionally
 - `0.75` - Frequently
 - `1.0` - Very Frequently
 
@@ -302,6 +310,7 @@ P(Fault | Symptoms) = P(Symptoms | Fault) × P(Fault) / P(Symptoms)
 ```
 
 **Where:**
+
 - `P(Fault | Symptoms)` = Probability of fault given symptoms
 - `P(Symptoms | Fault)` = Likelihood of symptoms for a fault
 - `P(Fault)` = Prior probability of the fault
@@ -310,6 +319,7 @@ P(Fault | Symptoms) = P(Symptoms | Fault) × P(Fault) / P(Symptoms)
 </div>
 
 **Key Advantages:**
+
 - ⚡ Computationally efficient
 - 📊 Excellent for multi-class classification
 - 🎯 Handles large feature spaces well
@@ -328,6 +338,7 @@ CF_combined = CF₁ + CF₂ × (1 - CF₁)
 ```
 
 **Where:**
+
 - `CF_expert` = Expert-defined certainty (0.6 - 1.0)
 - `Intensity_user` = User-reported symptom intensity (0 - 1.0)
 - `CF_combined` = Combined certainty from multiple symptoms
@@ -335,6 +346,7 @@ CF_combined = CF₁ + CF₂ × (1 - CF₁)
 </div>
 
 **Benefits:**
+
 - ✅ Handles uncertainty effectively
 - 🔗 Combines evidence from multiple symptoms
 - 📈 Provides clear confidence metrics
@@ -356,13 +368,13 @@ Our system leverages **both methodologies in tandem**:
 
 <div align="center">
 
-| Component | Count | Description |
-|-----------|-------|-------------|
-| 🔍 **Symptoms** | 41 | Comprehensive laptop fault indicators |
-| ⚠️ **Faults** | 22 | Distinct failure categories |
-| 📏 **CF Range** | 0.6 - 1.0 | Expert certainty factor values |
-| 🔗 **Rules** | 22 | Symptom-to-fault mapping rules |
-| 📂 **Categories** | 5 | Hardware, Software, BIOS, Power, Display |
+| Component         | Count     | Description                              |
+| ----------------- | --------- | ---------------------------------------- |
+| 🔍 **Symptoms**   | 41        | Comprehensive laptop fault indicators    |
+| ⚠️ **Faults**     | 22        | Distinct failure categories              |
+| 📏 **CF Range**   | 0.6 - 1.0 | Expert certainty factor values           |
+| 🔗 **Rules**      | 22        | Symptom-to-fault mapping rules           |
+| 📂 **Categories** | 5         | Hardware, Software, BIOS, Power, Display |
 
 </div>
 
@@ -373,6 +385,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **🔧 Hardware Faults**
+
 - LCD Damage
 - RAM Failure
 - HDD Malfunction
@@ -385,6 +398,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **⚡ Power & Battery**
+
 - Adapter/Charger Issues
 - Battery Depletion
 - CMOS Battery Problems
@@ -395,6 +409,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **💾 Storage & System**
+
 - OS Corruption
 - BIOS Errors
 - Application Crashes
@@ -408,6 +423,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **⌨️ Input Devices**
+
 - Keyboard Malfunction
 - Touchpad Failure
 - USB Device Issues
@@ -416,6 +432,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **🎮 Performance**
+
 - Insufficient RAM
 - VGA Memory Shortage
 - Low Processor Clock
@@ -424,6 +441,7 @@ Our system leverages **both methodologies in tandem**:
 <td width="33%">
 
 **🖥️ Display Issues**
+
 - Screen artifacts
 - No display output
 - Backlight problems
@@ -451,18 +469,21 @@ Display ███ 5 symptoms (12.2%)
 Our interface follows **modern design principles** with focus on usability and aesthetics:
 
 ### Visual Design
+
 - 🌙 **Dark Mode First**: Reduced eye strain with elegant dark theme
 - 💎 **Glassmorphism**: Translucent layers with backdrop blur effects
 - 🎨 **Gradient Accents**: Blue-purple gradient scheme for visual hierarchy
 - ✨ **Micro-interactions**: Smooth animations on hover and click events
 
 ### UX Principles
+
 - 📱 **Mobile-First Responsive**: Optimized for all screen sizes
 - ⚡ **Performance**: <1s page load, instant interactions
 - ♿ **Accessibility**: WCAG 2.1 compliant, keyboard navigation
 - 🎯 **Task-Oriented**: Clear user flow from input to results
 
 ### Component Library
+
 ```
 • Cards with hover lift effects
 • Smooth fade-in animations
@@ -509,6 +530,7 @@ app.run(debug=False, host='0.0.0.0')
 ### Knowledge Base Customization
 
 Modify `rules.py` to update:
+
 - Add new symptoms to `SYMPTOMS` dict
 - Define new faults in `FAULTS` dict
 - Update `RULES` for symptom-fault mappings
@@ -554,6 +576,7 @@ pip install -r requirements.txt
 <summary><b>Template Not Found Error</b></summary>
 
 Ensure your directory structure matches:
+
 ```
 project/
 ├── app.py
@@ -571,7 +594,7 @@ project/
 
 ```python
 # Verify Flask static folder configuration
-app = Flask(__name__, 
+app = Flask(__name__,
             static_folder='static',
             static_url_path='/static')
 ```
@@ -634,6 +657,7 @@ docker run -p 5000:5000 laptop-diagnosis
 ## 🗺️ Roadmap
 
 ### Version 1.0 ✅
+
 - [x] Core diagnosis engine (Naive Bayes + CF)
 - [x] Web interface with modern UI
 - [x] 41 symptoms, 22 faults knowledge base
@@ -641,6 +665,7 @@ docker run -p 5000:5000 laptop-diagnosis
 - [x] Search & filter functionality
 
 ### Version 2.0 🚧
+
 - [ ] **PDF Export**: Generate downloadable diagnosis reports
 - [ ] **History Tracking**: Save and review past diagnoses
 - [ ] **Multi-language**: English, Indonesian, Mandarin support
@@ -648,6 +673,7 @@ docker run -p 5000:5000 laptop-diagnosis
 - [ ] **Mobile App**: Native iOS & Android applications
 
 ### Version 3.0 🔮
+
 - [ ] **User Authentication**: Personal accounts with OAuth
 - [ ] **Admin Dashboard**: Manage knowledge base via GUI
 - [ ] **Machine Learning**: Improve accuracy with ML models
@@ -696,14 +722,12 @@ git push origin feature/AmazingFeature
 
 <br>
 
-
 ---
-
-
 
 ### 🙏 Acknowledgments
 
 Special thanks to:
+
 - [Flask](https://flask.palletsprojects.com/) - Microframework for Python
 - [Chart.js](https://www.chartjs.org/) - JavaScript charting library
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
@@ -729,6 +753,7 @@ Special thanks to:
 ### Report Issues
 
 Found a bug? Have a suggestion?
+
 - 🐛 [Report Bug](https://github.com/yourusername/laptop-diagnosis/issues/new?template=bug_report.md)
 - ✨ [Request Feature](https://github.com/yourusername/laptop-diagnosis/issues/new?template=feature_request.md)
 - 💬 [Join Discussion](https://github.com/yourusername/laptop-diagnosis/discussions)
@@ -749,9 +774,10 @@ If this project helped you, please consider giving it a ⭐ star!
 
 **Made by Lutfi**
 
-*Powered by Flask • Tailwind CSS • AI Technology*
+_Powered by Flask • Tailwind CSS • AI Technology_
 
 ## 📞 Support
 
 Jika ada pertanyaan atau masalah:
+
 - 📧 Email: lutfiharyaferdian@gmail.com
