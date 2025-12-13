@@ -1,87 +1,545 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="max-w-7xl mx-auto">
-  <div class="mb-8">
-    <h3 class="text-3xl font-bold text-white mb-2">Dashboard</h3>
-    <p class="text-slate-400">Silakan pilih menu untuk melanjutkan.</p>
+<!-- HERO SECTION -->
+<section class="min-h-[80vh] flex items-center justify-center -mt-8 mb-16">
+  <div class="max-w-4xl mx-auto text-center px-4">
+    <div class="mb-6">
+      <div
+        class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 mb-6 animate-pulse"
+      >
+        <i class="bi bi-laptop text-5xl text-blue-400"></i>
+      </div>
+    </div>
+
+    <h1
+      class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight fade-in-up"
+    >
+      Sistem Pakar<br />
+      <span
+        class="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+      >
+        Diagnosa Laptop
+      </span>
+    </h1>
+
+    <p
+      class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed fade-in-up stagger-1"
+    >
+      Mendiagnosa kerusakan laptop secara cepat dan akurat menggunakan metode
+      <span class="text-blue-400 font-semibold">Naive Bayes</span> &
+      <span class="text-purple-400 font-semibold">Certainty Factor</span>
+    </p>
+
+    <div
+      class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-up stagger-2"
+    >
+      <a
+        href="/diagnose-start"
+        class="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 flex items-center gap-2"
+      >
+        <i class="bi bi-play-circle"></i>
+        Mulai Diagnosa
+        <i
+          class="bi bi-arrow-right group-hover:translate-x-1 transition-transform"
+        ></i>
+      </a>
+
+      <a
+        href="#menu-utama"
+        class="px-8 py-4 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-600/50 transition-all duration-300 flex items-center gap-2"
+      >
+        <i class="bi bi-grid"></i>
+        Lihat Menu
+      </a>
+    </div>
   </div>
+</section>
 
-  <!-- GRID 4 MENU -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
-    <!-- CARD 1 -->
-    <a href="/diagnose-start" class="group">
+<!-- STATS SECTION WITH COUNTER -->
+<section class="mb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Stat 1 -->
       <div
-        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+        class="hover-lift bg-gradient-to-br from-blue-900/40 to-blue-800/30 rounded-2xl p-6 border border-blue-500/30 text-center fade-in-up stagger-1"
       >
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors"
-          >
-            <i class="bi bi-search-heart text-4xl text-blue-400"></i>
-          </div>
-          <h5 class="text-lg font-semibold text-white mb-2">Mulai Diagnosa</h5>
-          <p class="text-sm text-slate-400">
-            Proses diagnosa berdasarkan gejala laptop.
-          </p>
+        <div
+          class="w-14 h-14 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="bi bi-list-check text-3xl text-blue-400"></i>
         </div>
+        <div
+          class="text-4xl font-bold text-white mb-2 counter"
+          data-target="41"
+        >
+          0
+        </div>
+        <div class="text-slate-300">Gejala Terdata</div>
       </div>
-    </a>
 
-    <!-- CARD 2 -->
-    <a href="/gejala" class="group">
+      <!-- Stat 2 -->
       <div
-        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 hover:-translate-y-1"
+        class="hover-lift bg-gradient-to-br from-purple-900/40 to-purple-800/30 rounded-2xl p-6 border border-purple-500/30 text-center fade-in-up stagger-2"
       >
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors"
-          >
-            <i class="bi bi-list-task text-4xl text-purple-400"></i>
-          </div>
-          <h5 class="text-lg font-semibold text-white mb-2">Data Gejala</h5>
-          <p class="text-sm text-slate-400">Daftar lengkap 41 gejala.</p>
+        <div
+          class="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="bi bi-exclamation-triangle text-3xl text-purple-400"></i>
         </div>
+        <div
+          class="text-4xl font-bold text-white mb-2 counter"
+          data-target="22"
+        >
+          0
+        </div>
+        <div class="text-slate-300">Jenis Kerusakan</div>
       </div>
-    </a>
 
-    <!-- CARD 3 -->
-    <a href="/kerusakan" class="group">
+      <!-- Stat 3 -->
       <div
-        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-amber-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-1"
+        class="hover-lift bg-gradient-to-br from-emerald-900/40 to-emerald-800/30 rounded-2xl p-6 border border-emerald-500/30 text-center fade-in-up stagger-3"
       >
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors"
-          >
-            <i class="bi bi-exclamation-triangle text-4xl text-amber-400"></i>
-          </div>
-          <h5 class="text-lg font-semibold text-white mb-2">Data Kerusakan</h5>
-          <p class="text-sm text-slate-400">
-            22 jenis kerusakan & penjelasannya.
-          </p>
+        <div
+          class="w-14 h-14 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4"
+        >
+          <i class="bi bi-cpu text-3xl text-emerald-400"></i>
         </div>
-      </div>
-    </a>
-
-    <!-- CARD 4 -->
-    <a href="/tentang" class="group">
-      <div
-        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1"
-      >
-        <div class="flex flex-col items-center text-center">
-          <div
-            class="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors"
-          >
-            <i class="bi bi-info-circle text-4xl text-emerald-400"></i>
-          </div>
-          <h5 class="text-lg font-semibold text-white mb-2">Tentang Sistem</h5>
-          <p class="text-sm text-slate-400">
-            Informasi metode Naive Bayes + CF.
-          </p>
+        <div class="text-4xl font-bold text-white mb-2 counter" data-target="2">
+          0
         </div>
+        <div class="text-slate-300">Metode Kombinasi</div>
       </div>
-    </a>
+    </div>
   </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-6xl mx-auto mb-20">
+  <div
+    class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"
+  ></div>
 </div>
+
+<!-- MENU UTAMA SECTION -->
+<section id="menu-utama" class="mb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in-up">
+      <h2 class="text-3xl font-bold text-white mb-3">Menu Utama</h2>
+      <p class="text-slate-400">Pilih menu untuk melanjutkan</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- CARD 1 -->
+      <a href="/diagnose-start" class="group hover-lift fade-in-up stagger-1">
+        <div
+          class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 group-hover:scale-110 transition-all duration-300 flex-shrink-0"
+            >
+              <i class="bi bi-search-heart text-3xl text-blue-400"></i>
+            </div>
+            <div class="flex-1">
+              <h5
+                class="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors"
+              >
+                Mulai Diagnosa
+              </h5>
+              <p class="text-sm text-slate-400">
+                Proses diagnosa kerusakan laptop berdasarkan gejala yang dialami
+              </p>
+            </div>
+            <i
+              class="bi bi-arrow-right text-slate-600 group-hover:text-blue-400 group-hover:translate-x-2 transition-all"
+            ></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- CARD 2 -->
+      <a href="/gejala" class="group hover-lift fade-in-up stagger-2">
+        <div
+          class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/10 h-full"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-14 h-14 rounded-full bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 group-hover:scale-110 transition-all duration-300 flex-shrink-0"
+            >
+              <i class="bi bi-list-task text-3xl text-purple-400"></i>
+            </div>
+            <div class="flex-1">
+              <h5
+                class="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors"
+              >
+                Data Gejala
+              </h5>
+              <p class="text-sm text-slate-400">
+                Lihat daftar lengkap 41 gejala yang dapat didiagnosa sistem
+              </p>
+            </div>
+            <i
+              class="bi bi-arrow-right text-slate-600 group-hover:text-purple-400 group-hover:translate-x-2 transition-all"
+            ></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- CARD 3 -->
+      <a href="/kerusakan" class="group hover-lift fade-in-up stagger-3">
+        <div
+          class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 hover:border-amber-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/10 h-full"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-14 h-14 rounded-full bg-amber-500/10 flex items-center justify-center group-hover:bg-amber-500/20 group-hover:scale-110 transition-all duration-300 flex-shrink-0"
+            >
+              <i class="bi bi-exclamation-triangle text-3xl text-amber-400"></i>
+            </div>
+            <div class="flex-1">
+              <h5
+                class="text-xl font-semibold text-white mb-2 group-hover:text-amber-400 transition-colors"
+              >
+                Data Kerusakan
+              </h5>
+              <p class="text-sm text-slate-400">
+                22 jenis kerusakan laptop beserta penjelasannya
+              </p>
+            </div>
+            <i
+              class="bi bi-arrow-right text-slate-600 group-hover:text-amber-400 group-hover:translate-x-2 transition-all"
+            ></i>
+          </div>
+        </div>
+      </a>
+
+      <!-- CARD 4 -->
+      <a href="/tentang" class="group hover-lift fade-in-up stagger-4">
+        <div
+          class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 h-full"
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class="w-14 h-14 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 group-hover:scale-110 transition-all duration-300 flex-shrink-0"
+            >
+              <i class="bi bi-info-circle text-3xl text-emerald-400"></i>
+            </div>
+            <div class="flex-1">
+              <h5
+                class="text-xl font-semibold text-white mb-2 group-hover:text-emerald-400 transition-colors"
+              >
+                Tentang Sistem
+              </h5>
+              <p class="text-sm text-slate-400">
+                Informasi metode Naive Bayes dan Certainty Factor
+              </p>
+            </div>
+            <i
+              class="bi bi-arrow-right text-slate-600 group-hover:text-emerald-400 group-hover:translate-x-2 transition-all"
+            ></i>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-6xl mx-auto mb-20">
+  <div
+    class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"
+  ></div>
+</div>
+
+<!-- ALUR DIAGNOSA SECTION -->
+<section class="mb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in-up">
+      <h2 class="text-3xl font-bold text-white mb-3">Alur Diagnosa</h2>
+      <p class="text-slate-400">Proses diagnosa dalam 4 langkah mudah</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Step 1 -->
+      <div class="relative fade-in-up stagger-1">
+        <div
+          class="hover-lift bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 text-center h-full hover:border-blue-500/30 transition-all duration-300"
+        >
+          <div
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/50"
+          >
+            1
+          </div>
+          <div
+            class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mx-auto mb-4 mt-4"
+          >
+            <i class="bi bi-ui-checks text-2xl text-blue-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Pilih Gejala</h5>
+          <p class="text-sm text-slate-400">
+            Pilih gejala yang dialami laptop Anda dari daftar
+          </p>
+        </div>
+        <!-- Arrow -->
+        <div
+          class="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10"
+        >
+          <i class="bi bi-arrow-right text-2xl text-slate-600"></i>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative fade-in-up stagger-2">
+        <div
+          class="hover-lift bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 text-center h-full hover:border-purple-500/30 transition-all duration-300"
+        >
+          <div
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-purple-500/50"
+          >
+            2
+          </div>
+          <div
+            class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mx-auto mb-4 mt-4"
+          >
+            <i class="bi bi-cpu text-2xl text-purple-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Proses Sistem</h5>
+          <p class="text-sm text-slate-400">
+            Sistem menghitung menggunakan Naive Bayes & CF
+          </p>
+        </div>
+        <!-- Arrow -->
+        <div
+          class="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10"
+        >
+          <i class="bi bi-arrow-right text-2xl text-slate-600"></i>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative fade-in-up stagger-3">
+        <div
+          class="hover-lift bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 text-center h-full hover:border-amber-500/30 transition-all duration-300"
+        >
+          <div
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-amber-500/50"
+          >
+            3
+          </div>
+          <div
+            class="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center mx-auto mb-4 mt-4"
+          >
+            <i class="bi bi-graph-up text-2xl text-amber-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Hasil Diagnosa</h5>
+          <p class="text-sm text-slate-400">
+            Dapatkan hasil diagnosa dengan tingkat keyakinan
+          </p>
+        </div>
+        <!-- Arrow -->
+        <div
+          class="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10"
+        >
+          <i class="bi bi-arrow-right text-2xl text-slate-600"></i>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="relative fade-in-up stagger-4">
+        <div
+          class="hover-lift bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700/50 text-center h-full hover:border-emerald-500/30 transition-all duration-300"
+        >
+          <div
+            class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/50"
+          >
+            4
+          </div>
+          <div
+            class="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4 mt-4"
+          >
+            <i class="bi bi-check-circle text-2xl text-emerald-400"></i>
+          </div>
+          <h5 class="text-lg font-semibold text-white mb-2">Rekomendasi</h5>
+          <p class="text-sm text-slate-400">
+            Lihat detail kerusakan dan langkah selanjutnya
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="max-w-6xl mx-auto mb-20">
+  <div
+    class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent"
+  ></div>
+</div>
+
+<!-- METODE SECTION -->
+<section class="mb-20">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12 fade-in-up">
+      <h2 class="text-3xl font-bold text-white mb-3">Metode yang Digunakan</h2>
+      <p class="text-slate-400">Kombinasi dua metode untuk hasil akurat</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Naive Bayes -->
+      <div
+        class="hover-lift bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8 border border-blue-500/30 fade-in-up stagger-1"
+      >
+        <div class="flex items-start gap-4 mb-4">
+          <div
+            class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0"
+          >
+            <i class="bi-cpu text-2xl text-blue-400"></i>
+          </div>
+          <div>
+            <h5 class="text-xl font-semibold text-white mb-2">Naive Bayes</h5>
+            <p class="text-sm text-slate-300">
+              Metode klasifikasi probabilitas untuk menentukan kerusakan
+              berdasarkan gejala
+            </p>
+          </div>
+        </div>
+        <div class="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
+          <p class="text-sm text-slate-300 mb-2">Keunggulan:</p>
+          <ul class="space-y-1 text-sm text-slate-400">
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-blue-400 mt-0.5"></i>
+              <span>Cepat dan efisien</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-blue-400 mt-0.5"></i>
+              <span>Akurat untuk klasifikasi</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-blue-400 mt-0.5"></i>
+              <span>Mudah diimplementasikan</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Certainty Factor -->
+      <div
+        class="hover-lift bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-2xl p-8 border border-purple-500/30 fade-in-up stagger-2"
+      >
+        <div class="flex items-start gap-4 mb-4">
+          <div
+            class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0"
+          >
+            <i class="bi bi-lightning-charge text-2xl text-purple-400"></i>
+          </div>
+          <div>
+            <h5 class="text-xl font-semibold text-white mb-2">
+              Certainty Factor
+            </h5>
+            <p class="text-sm text-slate-300">
+              Mengukur tingkat keyakinan dan intensitas gejala untuk hasil lebih
+              presisi
+            </p>
+          </div>
+        </div>
+        <div
+          class="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20"
+        >
+          <p class="text-sm text-slate-300 mb-2">Keunggulan:</p>
+          <ul class="space-y-1 text-sm text-slate-400">
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+              <span>Menangani ketidakpastian</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+              <span>Kombinasi multiple gejala</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+              <span>Tingkat keyakinan jelas</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="mb-12">
+  <div class="max-w-4xl mx-auto fade-in-up">
+    <div
+      class="hover-lift bg-gradient-to-br from-blue-900/40 to-purple-900/40 rounded-2xl p-12 border border-blue-500/30 text-center relative overflow-hidden"
+    >
+      <!-- Decorative elements -->
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 rounded-full blur-3xl"
+      ></div>
+
+      <div class="relative z-10">
+        <h2 class="text-3xl font-bold text-white mb-4">
+          Siap Mendiagnosa Laptop Anda?
+        </h2>
+        <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+          Mulai diagnosa sekarang dan temukan kerusakan laptop Anda dengan cepat
+          dan akurat
+        </p>
+        <a
+          href="/diagnose-start"
+          class="inline-flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-300 group"
+        >
+          <i class="bi bi-rocket-takeoff"></i>
+          Mulai Sekarang
+          <i
+            class="bi bi-arrow-right group-hover:translate-x-1 transition-transform"
+          ></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Counter animation
+  const counters = document.querySelectorAll(".counter");
+  let counterStarted = false;
+
+  const animateCounter = (counter) => {
+    const target = parseInt(counter.getAttribute("data-target"));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+
+    updateCounter();
+  };
+
+  const counterObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !counterStarted) {
+          counterStarted = true;
+          counters.forEach((counter) => animateCounter(counter));
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  counters.forEach((counter) => counterObserver.observe(counter));
+</script>
 
 {% endblock %}

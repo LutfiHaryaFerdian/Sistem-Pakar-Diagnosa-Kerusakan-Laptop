@@ -1,7 +1,8 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="max-w-5xl mx-auto">
-  <div class="mb-8">
+  <!-- Header Section -->
+  <div class="mb-8 fade-in-up">
     <h3 class="text-3xl font-bold text-white mb-2 flex items-center gap-3">
       <i class="bi bi-info-circle text-emerald-400"></i>
       Tentang Sistem Pakar Diagnosa Kerusakan Laptop
@@ -9,13 +10,18 @@
     <p class="text-slate-400">Informasi tentang metode dan cara kerja sistem</p>
   </div>
 
+  <!-- Main Content Card -->
   <div
-    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 p-8 space-y-8"
+    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 p-8 mb-6 fade-in-up stagger-1"
   >
     <!-- Deskripsi Sistem -->
-    <div>
+    <div class="mb-8">
       <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-        <i class="bi bi-pin-angle text-blue-400"></i>
+        <div
+          class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center"
+        >
+          <i class="bi bi-pin-angle text-blue-400"></i>
+        </div>
         Deskripsi Sistem
       </h5>
       <p class="text-slate-300 leading-relaxed">
@@ -29,91 +35,402 @@
       </p>
     </div>
 
-    <div class="border-t border-slate-700/50"></div>
+    <div class="border-t border-slate-700/50 my-8"></div>
 
-    <!-- Metode Naive Bayes -->
-    <div>
-      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-        <i class="bi bi-brain text-purple-400"></i>
-        Metode Naive Bayes
-      </h5>
-      <p class="text-slate-300 leading-relaxed mb-4">
-        Naive Bayes digunakan untuk menghitung probabilitas awal dari setiap
-        jenis kerusakan. Sistem menilai apakah rangkaian gejala yang Anda
-        berikan paling cocok dengan rule (aturan) kerusakan pada basis
-        pengetahuan.
-      </p>
+    <!-- Accordion Section -->
+    <div class="space-y-4">
+      <!-- Accordion 1: Naive Bayes -->
+      <div
+        class="accordion-item border border-slate-700/50 rounded-xl overflow-hidden"
+      >
+        <button
+          class="accordion-header w-full px-6 py-4 bg-slate-800/50 hover:bg-slate-800 transition-all duration-300 flex items-center justify-between group"
+          data-target="accordion1"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 transition-colors"
+            >
+              <i class="bi-cpu text-xl text-purple-400"></i>
+            </div>
+            <span class="text-lg font-semibold text-white"
+              >Metode Naive Bayes</span
+            >
+          </div>
+          <i
+            class="bi bi-chevron-down text-slate-400 transition-transform duration-300 accordion-icon"
+          ></i>
+        </button>
+        <div
+          id="accordion1"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <div class="px-6 py-4 bg-slate-900/50">
+            <p class="text-slate-300 leading-relaxed mb-4">
+              Naive Bayes digunakan untuk menghitung probabilitas awal dari
+              setiap jenis kerusakan. Sistem menilai apakah rangkaian gejala
+              yang Anda berikan paling cocok dengan rule (aturan) kerusakan pada
+              basis pengetahuan.
+            </p>
 
-      <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-        <p class="text-slate-300 mb-2">Rumus sederhana:</p>
-        <p class="font-semibold text-blue-300 font-mono text-lg">
-          P(Kerusakan | Gejala) = P(G | K) × P(K)
-        </p>
+            <div
+              class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-6 mb-4"
+            >
+              <p class="text-slate-300 mb-2 font-medium">Rumus:</p>
+              <div
+                class="bg-slate-900/50 rounded-lg p-4 font-mono text-purple-300 text-center text-lg"
+              >
+                P(Kerusakan | Gejala) = P(G | K) × P(K)
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-sm font-semibold text-purple-400 mb-2">
+                Keunggulan:
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div
+                  class="flex items-start gap-2 text-sm text-slate-400 bg-slate-800/50 rounded-lg p-3"
+                >
+                  <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+                  <span>Cepat dan efisien dalam komputasi</span>
+                </div>
+                <div
+                  class="flex items-start gap-2 text-sm text-slate-400 bg-slate-800/50 rounded-lg p-3"
+                >
+                  <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+                  <span>Akurat untuk klasifikasi probabilistik</span>
+                </div>
+                <div
+                  class="flex items-start gap-2 text-sm text-slate-400 bg-slate-800/50 rounded-lg p-3"
+                >
+                  <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+                  <span>Mudah diimplementasikan</span>
+                </div>
+                <div
+                  class="flex items-start gap-2 text-sm text-slate-400 bg-slate-800/50 rounded-lg p-3"
+                >
+                  <i class="bi bi-check-circle text-purple-400 mt-0.5"></i>
+                  <span>Bekerja baik dengan data terbatas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="border-t border-slate-700/50"></div>
+      <!-- Accordion 2: Certainty Factor -->
+      <div
+        class="accordion-item border border-slate-700/50 rounded-xl overflow-hidden"
+      >
+        <button
+          class="accordion-header w-full px-6 py-4 bg-slate-800/50 hover:bg-slate-800 transition-all duration-300 flex items-center justify-between group"
+          data-target="accordion2"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center group-hover:bg-amber-500/30 transition-colors"
+            >
+              <i class="bi bi-lightning-charge text-xl text-amber-400"></i>
+            </div>
+            <span class="text-lg font-semibold text-white"
+              >Metode Certainty Factor</span
+            >
+          </div>
+          <i
+            class="bi bi-chevron-down text-slate-400 transition-transform duration-300 accordion-icon"
+          ></i>
+        </button>
+        <div
+          id="accordion2"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <div class="px-6 py-4 bg-slate-900/50">
+            <p class="text-slate-300 leading-relaxed mb-4">
+              Setelah probabilitas Naive Bayes didapatkan, metode Certainty
+              Factor digunakan untuk mengukur tingkat keyakinan berdasarkan
+              intensitas gejala.
+            </p>
 
-    <!-- Metode Certainty Factor -->
-    <div>
-      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-        <i class="bi bi-lightning-charge text-amber-400"></i>
-        Metode Certainty Factor (CF)
-      </h5>
-      <p class="text-slate-300 leading-relaxed mb-4">
-        Setelah probabilitas Naive Bayes didapatkan, metode Certainty Factor
-        digunakan untuk mengukur:
-      </p>
+            <div class="space-y-3 mb-4">
+              <p class="text-sm font-semibold text-amber-400 mb-2">
+                CF digunakan untuk mengukur:
+              </p>
+              <div
+                class="flex items-start gap-2 text-slate-300 bg-slate-800/50 rounded-lg p-3"
+              >
+                <i class="bi bi-dot text-amber-400 text-2xl"></i>
+                <span>Tingkat keyakinan pakar terhadap gejala</span>
+              </div>
+              <div
+                class="flex items-start gap-2 text-slate-300 bg-slate-800/50 rounded-lg p-3"
+              >
+                <i class="bi bi-dot text-amber-400 text-2xl"></i>
+                <span>Tingkat intensitas gejala dari pengguna</span>
+              </div>
+              <div
+                class="flex items-start gap-2 text-slate-300 bg-slate-800/50 rounded-lg p-3"
+              >
+                <i class="bi bi-dot text-amber-400 text-2xl"></i>
+                <span>Kombinasi CF dari beberapa gejala relevan</span>
+              </div>
+            </div>
 
-      <ul class="space-y-2 mb-4 ml-6">
-        <li class="text-slate-300 flex items-start gap-2">
-          <span class="text-amber-400 mt-1">•</span>
-          <span>Tingkat keyakinan pakar terhadap gejala</span>
-        </li>
-        <li class="text-slate-300 flex items-start gap-2">
-          <span class="text-amber-400 mt-1">•</span>
-          <span>Tingkat intensitas gejala dari pengguna</span>
-        </li>
-        <li class="text-slate-300 flex items-start gap-2">
-          <span class="text-amber-400 mt-1">•</span>
-          <span>Kombinasi CF dari beberapa gejala relevan</span>
-        </li>
-      </ul>
-
-      <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
-        <p class="text-slate-300 mb-2">Rumus kombinasi CF:</p>
-        <p class="font-semibold text-amber-300 font-mono text-lg">
-          CF<sub>final</sub> = CF<sub>1</sub> + CF<sub>2</sub>(1 −
-          CF<sub>1</sub>)
-        </p>
+            <div
+              class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6"
+            >
+              <p class="text-slate-300 mb-2 font-medium">Rumus kombinasi CF:</p>
+              <div
+                class="bg-slate-900/50 rounded-lg p-4 font-mono text-amber-300 text-center text-lg"
+              >
+                CF<sub>final</sub> = CF<sub>1</sub> + CF<sub>2</sub>(1 −
+                CF<sub>1</sub>)
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="border-t border-slate-700/50"></div>
+      <!-- Accordion 3: Cara Kerja -->
+      <div
+        class="accordion-item border border-slate-700/50 rounded-xl overflow-hidden"
+      >
+        <button
+          class="accordion-header w-full px-6 py-4 bg-slate-800/50 hover:bg-slate-800 transition-all duration-300 flex items-center justify-between group"
+          data-target="accordion3"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/30 transition-colors"
+            >
+              <i class="bi bi-gear text-xl text-blue-400"></i>
+            </div>
+            <span class="text-lg font-semibold text-white"
+              >Cara Kerja Sistem</span
+            >
+          </div>
+          <i
+            class="bi bi-chevron-down text-slate-400 transition-transform duration-300 accordion-icon"
+          ></i>
+        </button>
+        <div
+          id="accordion3"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <div class="px-6 py-4 bg-slate-900/50">
+            <div class="space-y-4">
+              <!-- Step 1 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm"
+                  >
+                    1
+                  </div>
+                </div>
+                <div>
+                  <h6 class="font-semibold text-white mb-1">Input Gejala</h6>
+                  <p class="text-sm text-slate-400">
+                    Pengguna memilih gejala yang dialami dan menentukan tingkat
+                    intensitasnya (0 - 1)
+                  </p>
+                </div>
+              </div>
 
-    <!-- Tujuan Sistem -->
-    <div>
-      <h5 class="text-xl font-semibold text-white mb-3 flex items-center gap-2">
-        <i class="bi bi-bullseye text-emerald-400"></i>
-        Tujuan Sistem
-      </h5>
-      <p class="text-slate-300 leading-relaxed">
-        Sistem ini membantu pengguna mengetahui kerusakan laptop secara cepat,
-        tanpa harus langsung ke teknisi. Hasil diagnosa memberikan kategori
-        kerusakan dan tingkat keyakinan berbasis pakar.
-      </p>
+              <!-- Step 2 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm"
+                  >
+                    2
+                  </div>
+                </div>
+                <div>
+                  <h6 class="font-semibold text-white mb-1">
+                    Perhitungan Naive Bayes
+                  </h6>
+                  <p class="text-sm text-slate-400">
+                    Sistem menghitung probabilitas setiap kerusakan berdasarkan
+                    gejala yang dipilih
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm"
+                  >
+                    3
+                  </div>
+                </div>
+                <div>
+                  <h6 class="font-semibold text-white mb-1">Perhitungan CF</h6>
+                  <p class="text-sm text-slate-400">
+                    Certainty Factor dihitung untuk setiap kerusakan dengan
+                    menggabungkan CF pakar dan intensitas user
+                  </p>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="flex gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold text-sm"
+                  >
+                    4
+                  </div>
+                </div>
+                <div>
+                  <h6 class="font-semibold text-white mb-1">Hasil Diagnosa</h6>
+                  <p class="text-sm text-slate-400">
+                    Sistem menampilkan top 3 kemungkinan kerusakan dengan
+                    tingkat keyakinan tertinggi
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion 4: Tujuan -->
+      <div
+        class="accordion-item border border-slate-700/50 rounded-xl overflow-hidden"
+      >
+        <button
+          class="accordion-header w-full px-6 py-4 bg-slate-800/50 hover:bg-slate-800 transition-all duration-300 flex items-center justify-between group"
+          data-target="accordion4"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors"
+            >
+              <i class="bi bi-bullseye text-xl text-emerald-400"></i>
+            </div>
+            <span class="text-lg font-semibold text-white">Tujuan Sistem</span>
+          </div>
+          <i
+            class="bi bi-chevron-down text-slate-400 transition-transform duration-300 accordion-icon"
+          ></i>
+        </button>
+        <div
+          id="accordion4"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-300"
+        >
+          <div class="px-6 py-4 bg-slate-900/50">
+            <p class="text-slate-300 leading-relaxed mb-4">
+              Sistem ini membantu pengguna mengetahui kerusakan laptop secara
+              cepat, tanpa harus langsung ke teknisi. Hasil diagnosa memberikan
+              kategori kerusakan dan tingkat keyakinan berbasis pakar.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div
+                class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="bi bi-lightning text-emerald-400"></i>
+                  <span class="font-semibold text-white">Cepat</span>
+                </div>
+                <p class="text-sm text-slate-400">
+                  Diagnosa dalam hitungan detik
+                </p>
+              </div>
+
+              <div
+                class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="bi bi-check-circle text-emerald-400"></i>
+                  <span class="font-semibold text-white">Akurat</span>
+                </div>
+                <p class="text-sm text-slate-400">Berbasis pengetahuan pakar</p>
+              </div>
+
+              <div
+                class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="bi bi-people text-emerald-400"></i>
+                  <span class="font-semibold text-white">Mudah</span>
+                </div>
+                <p class="text-sm text-slate-400">Interface user-friendly</p>
+              </div>
+
+              <div
+                class="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <i class="bi bi-graph-up text-emerald-400"></i>
+                  <span class="font-semibold text-white">Informatif</span>
+                </div>
+                <p class="text-sm text-slate-400">
+                  Hasil detail dengan visualisasi
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="mt-8">
+  <!-- Back Button -->
+  <div class="fade-in-up stagger-2">
     <a
       href="/"
-      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-medium rounded-lg border border-slate-600/50 transition-all duration-300"
+      class="inline-flex items-center gap-2 px-8 py-3 bg-slate-700/50 hover:bg-slate-700 text-slate-200 font-medium rounded-lg border border-slate-600/50 transition-all duration-300 hover:-translate-x-1"
     >
       <i class="bi bi-arrow-left"></i>
       Kembali
     </a>
   </div>
 </div>
+
+<script>
+  // Accordion functionality
+  const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+  accordionHeaders.forEach((header) => {
+    header.addEventListener("click", function () {
+      const targetId = this.getAttribute("data-target");
+      const content = document.getElementById(targetId);
+      const icon = this.querySelector(".accordion-icon");
+      const allContents = document.querySelectorAll(".accordion-content");
+      const allIcons = document.querySelectorAll(".accordion-icon");
+
+      // Close all other accordions
+      allContents.forEach((c) => {
+        if (c.id !== targetId) {
+          c.style.maxHeight = "0";
+        }
+      });
+
+      allIcons.forEach((i) => {
+        if (i !== icon) {
+          i.style.transform = "rotate(0deg)";
+        }
+      });
+
+      // Toggle current accordion
+      if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+        content.style.maxHeight = "0";
+        icon.style.transform = "rotate(0deg)";
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        icon.style.transform = "rotate(180deg)";
+      }
+    });
+  });
+
+  // Open first accordion by default
+  setTimeout(() => {
+    accordionHeaders[0].click();
+  }, 500);
+</script>
 
 {% endblock %}
