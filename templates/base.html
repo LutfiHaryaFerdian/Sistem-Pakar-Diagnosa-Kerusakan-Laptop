@@ -395,34 +395,16 @@
       });
 
       // Active nav link - FIXED VERSION
-      const currentPath = window.location.pathname;
-      const navLinks = document.querySelectorAll(".nav-link");
+      document.addEventListener("DOMContentLoaded", () => {
+        const path = window.location.pathname;
 
-      navLinks.forEach((link) => {
-        const href = link.getAttribute("href");
-        const page = link.getAttribute("data-page");
+        console.log("PATH:", path); // debug
 
-        // Remove any existing active class
-        link.classList.remove("nav-link-active");
-
-        // Match exact path
-        if (href === currentPath) {
-          link.classList.add("nav-link-active");
-        }
-        // Special handling for diagnose pages
-        else if (page === "diagnose") {
-          // Check if current path is any diagnose-related page
-          if (
-            currentPath === "/diagnose-start" ||
-            currentPath === "/diagnose" ||
-            currentPath.startsWith("/diagnose")
-          ) {
-            link.classList.add("nav-link-active");
-          }
-        }
-        // Special handling for home page
-        else if (page === "home" && currentPath === "/") {
-          link.classList.add("nav-link-active");
+        // AKTIFKAN MENU DIAGNOSE HANYA SAAT /diagnose-start
+        if (path.includes("diagnose-start")) {
+          document
+            .querySelectorAll('[data-page="diagnose"]')
+            .forEach((el) => el.classList.add("nav-link-active"));
         }
       });
 
