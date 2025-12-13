@@ -16,7 +16,7 @@
 
     <!-- Google Font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
 
@@ -30,11 +30,11 @@
         scroll-behavior: smooth;
       }
 
-      /* Navbar scroll effect */
+      /* Navbar scroll effect - Enhanced */
       .navbar-scrolled {
-        background: rgba(30, 41, 59, 0.95) !important;
+        background: rgba(15, 23, 42, 0.95) !important;
         backdrop-filter: blur(20px);
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 32px -8px rgba(59, 130, 246, 0.3);
       }
 
       /* Mobile menu animation */
@@ -94,15 +94,60 @@
         top: 0;
         left: 0;
         height: 3px;
-        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
         z-index: 9999;
         transition: width 0.2s ease;
       }
 
-      /* Active nav link */
+      /* Active nav link - Enhanced */
       .nav-link-active {
         color: #60a5fa !important;
         font-weight: 600;
+        background: rgba(59, 130, 246, 0.1) !important;
+      }
+
+      /* Navbar hover effect */
+      .nav-link {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-link::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, #3b82f6, #8b5cf6);
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::before {
+        width: 80%;
+      }
+
+      /* Logo animation */
+      .logo-icon {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      /* Glassmorphism effect */
+      .glass-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
     </style>
   </head>
@@ -113,63 +158,79 @@
     <!-- PROGRESS BAR -->
     <div id="progressBar" class="progress-bar" style="width: 0%"></div>
 
-    <!-- NAVIGATION -->
+    <!-- NAVIGATION - Enhanced -->
     <nav
       id="mainNav"
       class="bg-slate-800/50 backdrop-blur-lg border-b border-slate-700/50 sticky top-0 z-50 transition-all duration-300"
     >
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between py-4">
-          <!-- Logo -->
+          <!-- Logo - Enhanced -->
           <a
             href="/"
-            class="text-xl font-semibold text-white flex items-center gap-2 hover:text-blue-400 transition-colors"
+            class="text-xl font-bold text-white flex items-center gap-3 hover:text-blue-400 transition-all duration-300 group"
           >
-            <i class="bi bi-laptop text-blue-400 text-2xl"></i>
-            <span class="hidden md:inline">Sistem Pakar Diagnosa Laptop</span>
-            <span class="md:hidden">SPDL</span>
+            <div class="relative">
+              <div
+                class="absolute inset-0 bg-blue-500/20 rounded-lg blur-xl group-hover:bg-blue-500/30 transition-all"
+              ></div>
+              <i
+                class="bi bi-laptop logo-icon text-3xl text-blue-400 relative"
+              ></i>
+            </div>
+            <div>
+              <span
+                class="hidden md:inline bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+              >
+                Sistem Pakar Diagnosa Laptop
+              </span>
+              <span
+                class="md:hidden bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                >SPDL</span
+              >
+            </div>
           </a>
 
-          <!-- Desktop Menu -->
-          <div class="hidden lg:flex items-center gap-1">
+          <!-- Desktop Menu - Enhanced -->
+          <div class="hidden lg:flex items-center gap-2">
             <a
               href="/"
-              class="nav-link px-4 py-2 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 flex items-center gap-2"
+              class="nav-link px-5 py-2.5 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-xl transition-all duration-300 flex items-center gap-2 font-medium"
               data-page="home"
             >
-              <i class="bi bi-house-door"></i>
+              <i class="bi bi-house-door text-lg"></i>
               <span>Beranda</span>
             </a>
             <a
               href="/diagnose-start"
-              class="nav-link px-4 py-2 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 flex items-center gap-2"
+              class="nav-link px-5 py-2.5 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-xl transition-all duration-300 flex items-center gap-2 font-medium"
               data-page="diagnose"
             >
-              <i class="bi bi-search-heart"></i>
+              <i class="bi bi-search-heart text-lg"></i>
               <span>Diagnosa</span>
             </a>
             <a
               href="/gejala"
-              class="nav-link px-4 py-2 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 flex items-center gap-2"
+              class="nav-link px-5 py-2.5 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-xl transition-all duration-300 flex items-center gap-2 font-medium"
               data-page="gejala"
             >
-              <i class="bi bi-list-task"></i>
+              <i class="bi bi-list-task text-lg"></i>
               <span>Gejala</span>
             </a>
             <a
               href="/kerusakan"
-              class="nav-link px-4 py-2 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 flex items-center gap-2"
+              class="nav-link px-5 py-2.5 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-xl transition-all duration-300 flex items-center gap-2 font-medium"
               data-page="kerusakan"
             >
-              <i class="bi bi-exclamation-triangle"></i>
+              <i class="bi bi-exclamation-triangle text-lg"></i>
               <span>Kerusakan</span>
             </a>
             <a
               href="/tentang"
-              class="nav-link px-4 py-2 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 flex items-center gap-2"
+              class="nav-link px-5 py-2.5 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-xl transition-all duration-300 flex items-center gap-2 font-medium"
               data-page="tentang"
             >
-              <i class="bi bi-info-circle"></i>
+              <i class="bi bi-info-circle text-lg"></i>
               <span>Tentang</span>
             </a>
           </div>
@@ -177,9 +238,9 @@
           <!-- Mobile Menu Button -->
           <button
             id="mobileMenuBtn"
-            class="lg:hidden text-slate-300 hover:text-blue-400 transition-colors"
+            class="lg:hidden text-slate-300 hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-slate-700/50"
           >
-            <i class="bi bi-list text-2xl" id="menuIcon"></i>
+            <i class="bi bi-list text-3xl" id="menuIcon"></i>
           </button>
         </div>
 
@@ -188,38 +249,38 @@
           <div class="py-4 space-y-2">
             <a
               href="/"
-              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200"
+              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium"
               data-page="home"
             >
-              <i class="bi bi-house-door mr-2"></i> Beranda
+              <i class="bi bi-house-door mr-3"></i> Beranda
             </a>
             <a
               href="/diagnose-start"
-              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200"
+              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium"
               data-page="diagnose"
             >
-              <i class="bi bi-search-heart mr-2"></i> Diagnosa
+              <i class="bi bi-search-heart mr-3"></i> Diagnosa
             </a>
             <a
               href="/gejala"
-              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200"
+              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium"
               data-page="gejala"
             >
-              <i class="bi bi-list-task mr-2"></i> Gejala
+              <i class="bi bi-list-task mr-3"></i> Gejala
             </a>
             <a
               href="/kerusakan"
-              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200"
+              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium"
               data-page="kerusakan"
             >
-              <i class="bi bi-exclamation-triangle mr-2"></i> Kerusakan
+              <i class="bi bi-exclamation-triangle mr-3"></i> Kerusakan
             </a>
             <a
               href="/tentang"
-              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200"
+              class="nav-link block px-4 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium"
               data-page="tentang"
             >
-              <i class="bi bi-info-circle mr-2"></i> Tentang
+              <i class="bi bi-info-circle mr-3"></i> Tentang
             </a>
           </div>
         </div>
@@ -234,18 +295,32 @@
     <!-- SCROLL TO TOP BUTTON -->
     <button
       id="scrollTopBtn"
-      class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-40 flex items-center justify-center"
+      class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-full shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/70 transition-all duration-300 opacity-0 pointer-events-none z-40 flex items-center justify-center group"
     >
-      <i class="bi bi-arrow-up text-xl"></i>
+      <i
+        class="bi bi-arrow-up text-xl group-hover:transform group-hover:-translate-y-1 transition-transform"
+      ></i>
     </button>
 
-    <!-- FOOTER -->
-    <footer class="mt-16 pb-8 text-center text-slate-400 text-sm">
-      <div class="border-t border-slate-700/50 pt-6">
-        <p class="mb-2">Sistem Pakar Diagnosa Laptop</p>
-        <p class="text-xs text-slate-500">
-          Menggunakan Metode Naive Bayes & Certainty Factor
+    <!-- FOOTER - Enhanced -->
+    <footer class="mt-16 pb-8 text-center text-slate-400">
+      <div class="border-t border-slate-700/50 pt-8">
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <i class="bi bi-laptop text-blue-400 text-xl"></i>
+          <p class="text-lg font-semibold text-slate-200">
+            Sistem Pakar Diagnosa Laptop
+          </p>
+        </div>
+        <p class="text-sm text-slate-500 mb-4">
+          Menggunakan Metode
+          <span class="text-blue-400 font-medium">Naive Bayes</span> &
+          <span class="text-purple-400 font-medium">Certainty Factor</span>
         </p>
+        <div
+          class="flex items-center justify-center gap-4 text-xs text-slate-600"
+        >
+          <span>© 2024 All rights reserved</span>
+        </div>
       </div>
     </footer>
 
@@ -319,7 +394,7 @@
         });
       });
 
-      // Active nav link
+      // Active nav link - FIXED VERSION
       const currentPath = window.location.pathname;
       const navLinks = document.querySelectorAll(".nav-link");
 
@@ -327,18 +402,25 @@
         const href = link.getAttribute("href");
         const page = link.getAttribute("data-page");
 
-        // Check for exact match
+        // Remove any existing active class
+        link.classList.remove("nav-link-active");
+
+        // Match exact path
         if (href === currentPath) {
           link.classList.add("nav-link-active");
         }
         // Special handling for diagnose pages
-        else if (
-          page === "diagnose" &&
-          (currentPath === "/diagnose-start" || currentPath === "/diagnose")
-        ) {
-          link.classList.add("nav-link-active");
+        else if (page === "diagnose") {
+          // Check if current path is any diagnose-related page
+          if (
+            currentPath === "/diagnose-start" ||
+            currentPath === "/diagnose" ||
+            currentPath.startsWith("/diagnose")
+          ) {
+            link.classList.add("nav-link-active");
+          }
         }
-        // Special handling for home
+        // Special handling for home page
         else if (page === "home" && currentPath === "/") {
           link.classList.add("nav-link-active");
         }
@@ -359,7 +441,6 @@
         });
       }, observerOptions);
 
-      // Observe all cards and sections
       document.querySelectorAll("section, .hover-lift").forEach((el) => {
         observer.observe(el);
       });
