@@ -10,61 +10,67 @@ def get_symptom_category(symptom_code):
             return category
     return "Other"
 
-@app.route("/gejala")
-def gejala_page():
-    return render_template("gejala.html", symptoms=SYMPTOMS)
-
-@app.route("/kerusakan")
-def kerusakan_page():
-    return render_template("kerusakan.html", faults=FAULTS)
-
-@app.route("/tentang")
-def tentang_page():
-    return render_template("tentang.html")
 
 @app.route("/")
 def index():
     return render_template("index.html", symptoms=SYMPTOMS)
 
+
+@app.route("/gejala")
+def gejala_page():
+    return render_template("gejala.html", symptoms=SYMPTOMS)
+
+
+@app.route("/kerusakan")
+def kerusakan_page():
+    return render_template("kerusakan.html", faults=FAULTS)
+
+
+@app.route("/tentang")
+def tentang_page():
+    return render_template("tentang.html")
+
+
 @app.route("/diagnose-start")
 def diagnose_start():
-    # Buat dictionary kategori untuk setiap gejala
-    symptom_categories = {}
-    for code in SYMPTOMS.keys():
-        symptom_categories[code] = get_symptom_category(code)
-    
+    symptom_categories = {
+        code: get_symptom_category(code)
+        for code in SYMPTOMS.keys()
+    }
+
     return render_template(
         "form.html",
         symptoms=SYMPTOMS,
         symptom_categories=symptom_categories
     )
 
+
 @app.route("/diagnose", methods=["POST"])
 def do_diagnose():
     symptoms = {}
-    for code in request.form:
-        value = request.form[code]
+
+    for code, value in request.form.items():
         if value != "0":
             symptoms[code] = float(value)
 
     result = diagnose(symptoms)
 
-    # Jika tidak ada hasil
     if result is None:
         return render_template(
             "error.html",
             message="Tidak dapat mendiagnosa. Silakan pilih minimal satu gejala dengan intensitas."
         )
 
-    # ---- PERBAIKAN UTAMA: gunakan result["top_3"] ----
-    top3_list = []
-    for item in result["top_3"]:
-        top3_list.append({
+    # ambil top 3 hasil
+    top3_list = [
+        {
             "fault_code": item["fault_code"],
             "fault_name": item["fault_name"],
             "cf_percent": item["cf_percent"],
             "details_count": len(item["details"])
-        })
+        }
+        for item in result["top_3"]
+    ]
 
     import json
 
@@ -76,5 +82,6 @@ def do_diagnose():
     )
 
 
+# hanya jalan di lokal, diabaikan oleh Vercel
 if __name__ == "__main__":
     app.run(debug=True)
